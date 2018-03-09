@@ -27,7 +27,7 @@ The table is sorted alphabetically by service name.
 | Hue       | Kerberos Ticket Renewer | 18041     | 19041         | [cdh-hue-kerberos-ticket-renewer.yaml][13]  |
 | Hue       | Loadbalancer            | 18042     | 19042         | [cdh-hue-loadbalancer.yaml][14]             |
 | Kafka     | Kafka Broker            | 18090     | 19090         | [cdh-kafka-broker.yaml][15]                 |
-| Kafka     | Kafka MirrorMaker       | 18091     | 19091         | [cdh-kafke-mirrormaker.yaml][16]            |
+| Kafka     | Kafka MirrorMaker       | 18091     | 19091         | [cdh-kafka-mirrormaker.yaml][16]            |
 | Oozie     | Oozie Server            | 18050     | 19050         | [cdh-oozie-server.yaml][17]                 |
 | Sentry    | Sentry Server           | 18060     | 19060         | [cdh-sentry-server.yaml][18]                |
 | Solr      | Solr Server             | 18100     | 19100         | [cdh-solr-server.yaml][19]                  |
@@ -80,7 +80,7 @@ Example for configuring the DataNode:
 [13]: configuration/cdh-hue-kerberos-ticket-renewer.yaml
 [14]: configuration/cdh-hue-loadbalancer.yaml
 [15]: configuration/cdh-kafka-broker.yaml
-[16]: configuration/cdh-kafke-mirrormaker.yaml
+[16]: configuration/cdh-kafka-mirrormaker.yaml
 [17]: configuration/cdh-oozie-server.yaml
 [18]: configuration/cdh-sentry-server.yaml
 [19]: configuration/cdh-solr-server.yaml
