@@ -1,0 +1,12 @@
+---
+startDelaySeconds: 0
+ssl: false
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+attrNameSnakeCase: true
+whitelistObjectNames:
+  - 'Hadoop:service=NameNode,name=*'
+blacklistObjectNames:
+  - 'Hadoop:service=NameNode,name=StartupProgress*'
+  - 'Hadoop:service=NameNode,name=UgiMetrics*'
+  - 'Hadoop:service=NameNode,name=RetryCache*'

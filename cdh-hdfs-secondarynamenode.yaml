@@ -1,0 +1,10 @@
+---
+startDelaySeconds: 0
+ssl: false
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+attrNameSnakeCase: true
+whitelistObjectNames:
+  - 'Hadoop:service=SecondaryNameNode,name=*'
+blacklistObjectNames:
+  - 'Hadoop:service=SecondaryNameNode,name=UgiMetrics*'

@@ -1,0 +1,15 @@
+---
+startDelaySeconds: 0
+ssl: false
+lowercaseOutputName: true
+lowercaseOutputLabelNames: true
+attrNameSnakeCase: true
+whitelistObjectNames:
+  - 'Catalina:host=localhost,path=/webhdfs*'
+  - 'Catalina:host=localhost,type=Deployer*'
+  - 'Catalina:host=localhost,type=Host*'
+blacklistObjectNames:
+  - 'Catalina:host=localhost,path=/webhdfs,type=Cache'
+  - 'Catalina:host=localhost,path=/webhdfs,type=Loader'
+  - 'Catalina:host=localhost,path=/webhdfs,type=Manager'
+  - 'Catalina:host=localhost,path=/webhdfs,type=WebappClassLoader'
