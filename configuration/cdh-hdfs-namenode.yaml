@@ -5,7 +5,6 @@ lowercaseOutputName: true
 lowercaseOutputLabelNames: true
 whitelistObjectNames:
   - 'Hadoop:service=NameNode,name=*'
-  - 'Hadoop:service=NameNode,name=*'
   - 'Hadoop:service=NameNode,name=MetricsSystem,sub=*'
 blacklistObjectNames:
   - 'Hadoop:service=NameNode,name=RetryCache.NameNodeRetryCache'
