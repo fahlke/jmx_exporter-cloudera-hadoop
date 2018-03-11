@@ -3,16 +3,39 @@ startDelaySeconds: 0
 ssl: false
 lowercaseOutputName: true
 lowercaseOutputLabelNames: true
-attrNameSnakeCase: true
 whitelistObjectNames:
   - 'Hadoop:service=DataNode,name=*'
+  - 'Hadoop:service=DataNode,name=MetricsSystem,sub=*'
 blacklistObjectNames:
   - 'Hadoop:service=DataNode,name=RpcActivity*'
   - 'Hadoop:service=DataNode,name=RpcDetailedActivity*'
-  - 'Hadoop:service=DataNode,name=UgiMetrics*'
+  - 'Hadoop:service=DataNode,name=UgiMetrics'
 rules:
-  # DataNodeActivity pattern
+  # MetricsSystem
+  - pattern: 'Hadoop<service=(.*), name=MetricsSystem, sub=(.*)><>(.*): (\d+)'
+    attrNameSnakeCase: true
+    name: hadoop_$1_$3
+    value: $4
+    labels:
+      service: HDFS
+      role: $1
+      kind: 'MetricsSystem'
+      sub: $2
+    type: GAUGE
+  # FSDatasetState (also extracts the FSDataset ID)
+  - pattern: 'Hadoop<service=(.*), name=FSDatasetState-(.*)><>(.*): (\d+)'
+    attrNameSnakeCase: true
+    name: hadoop_$1_$3
+    value: $4
+    labels:
+      service: HDFS
+      role: $1
+      fsdatasetid: $2
+      kind: 'FSDatasetState'
+    type: GAUGE
+  # DataNodeActivity (also extracts hostname and port)
   - pattern: 'Hadoop<service=(.*), name=DataNodeActivity-(.*)-(\d+)><>(.*): (\d+)'
+    attrNameSnakeCase: true
     name: hadoop_$1_$4
     value: $5
     labels:
@@ -22,41 +45,13 @@ rules:
       port: $3
       kind: 'DataNodeActivity'
     type: GAUGE
-  # DataNodeInfo pattern
-  - pattern: 'Hadoop<service=(.*), name=DataNodeInfo><>(.*): (\d+)'
-    name: hadoop_$1_$2
-    value: $3
-    labels:
-      service: HDFS
-      role: $1
-      kind: 'DataNodeInfo'
-    type: GAUGE
-  # FSDatasetState pattern (also extracts the FSDataset ID)
-  - pattern: 'Hadoop<service=(.*), name=FSDatasetState-(.*)><>(.*): (\d+)'
-    name: hadoop_$1_$3
-    value: $4
-    labels:
-      service: HDFS
-      role: $1
-      fsdatasetid: $2
-      kind: 'FSDatasetState'
-    type: GAUGE
-  # JVM Metrics
-  - pattern: 'Hadoop<service=(.*), name=JvmMetrics><>(.*): (\d+)'
-    name: hadoop_$1_$2
-    value: $3
-    labels:
-      service: HDFS
-      role: $1
-      kind: 'JVMMetrics'
-    type: GAUGE
-  # Wildcard pattern to match new and unknown/unconfigured metrics
+  # All other services
   - pattern: 'Hadoop<service=(.*), name=(.*)><>(.*): (\d+)'
+    attrNameSnakeCase: true
     name: hadoop_$1_$3
     value: $4
     labels:
       service: HDFS
       role: $1
       kind: $2
-      unknown: '1'
     type: GAUGE

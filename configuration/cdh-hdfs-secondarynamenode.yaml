@@ -3,8 +3,30 @@ startDelaySeconds: 0
 ssl: false
 lowercaseOutputName: true
 lowercaseOutputLabelNames: true
-attrNameSnakeCase: true
 whitelistObjectNames:
   - 'Hadoop:service=SecondaryNameNode,name=*'
+  - 'Hadoop:service=SecondaryNameNode,name=MetricsSystem,sub=*'
 blacklistObjectNames:
-  - 'Hadoop:service=SecondaryNameNode,name=UgiMetrics*'
+  - 'Hadoop:service=SecondaryNameNode,name=UgiMetrics'
+rules:
+  # MetricsSystem
+  - pattern: 'Hadoop<service=(.*), name=MetricsSystem, sub=(.*)><>(.*): (\d+)'
+    attrNameSnakeCase: true
+    name: hadoop_$1_$3
+    value: $4
+    labels:
+      service: HDFS
+      role: $1
+      kind: 'MetricsSystem'
+      sub: $2
+    type: GAUGE
+  # SecondaryNameNodeInfo
+  - pattern: 'Hadoop<service=(.*), name=(.*)><>(.*): (\d+)'
+    attrNameSnakeCase: true
+    name: hadoop_$1_$3
+    value: $4
+    labels:
+      service: HDFS
+      role: $1
+      kind: $2
+    type: GAUGE
